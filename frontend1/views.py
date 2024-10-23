@@ -7,12 +7,23 @@ from django.contrib.auth.decorators import login_required
 
 
 def gethome(request):
-    user=request.user
+    user = request.user
     courses = coursemodel.objects.all()
-    cartitems = list(add_to_cart.objects.filter(userid=user).values_list("courseid",flat=True))
-    enrolleditems = list(enrolled_courses.objects.filter(userid=user).values_list("courseid", flat=True))
-    return render(request,'frontend/home.html',{'courses':courses,'cartitems':cartitems,"enrolleditems":enrolleditems})
 
+    if user.is_authenticated:
+        # User is logged in
+        cartitems = list(add_to_cart.objects.filter(userid=user).values_list("courseid", flat=True))
+        enrolleditems = list(enrolled_courses.objects.filter(userid=user).values_list("courseid", flat=True))
+    else:
+        # User is anonymous
+        cartitems = []
+        enrolleditems = []
+
+    return render(request, 'frontend/home.html', {
+        'courses': courses,
+        'cartitems': cartitems,
+        "enrolleditems": enrolleditems
+    })
 
 
 def getcourses(request):
@@ -20,7 +31,6 @@ def getcourses(request):
     courses = coursemodel.objects.all()
     cartitems = list(add_to_cart.objects.filter(userid=user).values_list("courseid",flat=True))
     enrolleditems = list(enrolled_courses.objects.filter(userid=user).values_list("courseid", flat=True))
-    
     return render(request,'frontend/coursecard.html',{'courses':courses,'cartitems':cartitems,"enrolleditems":enrolleditems})
 
 

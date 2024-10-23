@@ -83,16 +83,22 @@
                     {{ course.id }} 
                     {{ enrolleditems }}  {% endcomment %}
 
-
-                {% if course.id in enrolleditems %}
-                    <a href="{% url 'enrolledcourses' %}">
-                        <button class="buy-button">Enrolled</button>
-                    </a>
+                    {% if user.is_authenticated %}
+                    {% if course.id in enrolleditems %}
+                        <a href="{% url 'enrolledcourses' %}">
+                            <button class="buy-button">Enrolled</button>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'checkoutwithid' course.id %}">
+                            <button class="buy-button">Enroll now</button>
+                        </a>
+                    {% endif %}
                 {% else %}
-                    <a href="{% url 'checkoutwithid' course.id %}">
-                        <button class="buy-button">Enroll now</button>
+                    <a href="{% url 'login' %}">
+                        <button class="buy-button">Login / Signup</button>
                     </a>
-                {% endif %}
+                {% endif %}                
+
             </div>
         </div>
         {% endfor %}
