@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/backend/menu.css' %}">
+</head>
+<body>
+
+    <h1 class="card-heading">MENU</h1>
+    <div class="course-container">
+    {% for course in courses %}
+    <div>
+        <div class="course-card">
+            <img src="{{ course.courseimage.url }}" alt="{{ course.coursename }}">
+            <div class="content">
+                <div>
+                <h2>{{ course.coursename }}</h2>
+                <p>{{ course.description|truncatewords:15 }}</p>
+                </div>
+                <hr>
+                <div class="tags">
+                    {% for concept in course.courselist.all %}
+                        <div class="tag">{{ concept.courseconcept }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="footer">
+                <p>By {{ course.courseTutor }}</p>
+                <p>₹ {{ course.courseprice }}</p>
+            </div>
+        </div>
+        <div>
+            <a href="{% url 'myapp:delete' course.id %}"><button class="button">Delete</button></a>
+        </div>
+        <div>
+            <a href="{% url 'myapp:update' course.id %}"><button class="button">Update</button></a>
+        </div>
+    </div>
+    {% endfor %}
+    <div>
+        <a href="{% url 'myapp:coursemodel' %}"><span class="add-more">+</span></a>
+    </div>
+</div>
+</body>
+</html>

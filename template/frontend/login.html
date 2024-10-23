@@ -1,0 +1,61 @@
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👷‍♀️ SignIn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/frontend/login.css' %}">
+</head>
+
+<body>
+
+    <nav>
+        <input type="checkbox" id="toggle-menu">
+        <label for="toggle-menu" class="menu-icon">&#9776;</label>
+        
+        <div class="navbar-left">
+            <a href="#">👷‍♀️ Techtutor Coding School</a>
+        </div>
+        
+        <div class="navbar-right">
+            <a href="{% url 'gethome' %}">Home</a>
+            <a href="{% url 'getcourses' %}">Courses</a>
+            <a href="{% url 'login' %}"><button id="nav-button">Sign In</button></a>
+        </div>
+    </nav>
+
+    <div class="flex">
+        <div class="login-container">
+            <h2>Sign In</h2>
+            <p>New user? <a href="{% url 'register' %}">Create an account</a></p>
+            {% if data %}
+            <h2>{{data}}</h2>
+            {% endif %}
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label for="email">Email address</label>
+                    <input type="email" id="email" name="email" required value="{{x}}">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="continue-btn">Continue</button>
+                <h4 class="or">Or</h4>
+            </form>
+            {% if x %}
+            <a href="{% url 'changepassword' x %}" class="forgot-password">Forgot Password?</a>
+            {% else %}
+            <a href="" class="forgot-password">Forgot Password?</a>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👷‍♀️ Enrolled-Courses</title>
+    <link rel="stylesheet" href="{% static 'css/frontend/enrolledcourses.css' %}">
+</head>
+<body>
+
+    
+    <nav>
+        <input type="checkbox" id="toggle-menu">
+        <label for="toggle-menu" class="menu-icon">&#9776;</label>
+        
+        <div class="navbar-left">
+            <a href="#">👷‍♀️ Techtutor Coding School</a>
+        </div>
+        
+        <div class="navbar-right">
+            <a href="{% url 'gethome' %}">Home</a>
+            <a href="{% url 'getcourses' %}">Courses</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'cartview' %}">Cart</a>
+            <a href="{% url 'enrolledcourses' %}">Enrolled-courses</a>
+            <button id="user-circle"><a href="{% url 'profile' %}">{{ user.fullname|slice:":1" }}</a></button>
+            {% else %}
+            <a href="{% url 'login' %}"><button id="nav-button">Sign In</button></a>
+            {% endif %}
+        </div>
+    </nav>
+
+
+    <div class="page-content">
+        <div class="container">
+            <h1>My Enrolled Courses ({{ items|length }})</h1>
+            {% if items %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for enrollment in items %}
+                            <tr>
+                                <td data-label="Course Name">{{ enrollment.courseid.coursename }}</td>
+                                <td data-label="Action"><a href="#" class="button">Go to Course</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="no-courses">You haven't enrolled in any courses yet.</p>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>

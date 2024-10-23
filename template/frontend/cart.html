@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/frontend/cart.css' %}">
+</head>
+<body>
+
+    <nav>
+        <input type="checkbox" id="toggle-menu">
+        <label for="toggle-menu" class="menu-icon">&#9776;</label>
+        
+        <div class="navbar-left">
+            <a href="#">👷‍♀️ Techtutor Coding School</a>
+        </div>
+        
+        <div class="navbar-right">
+            <a href="{% url 'gethome' %}">Home</a>
+            <a href="{% url 'getcourses' %}">Courses</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'cartview' %}">Cart</a>
+            <a href="{% url 'enrolledcourses' %}">Enrolled-courses</a>
+            <button id="user-circle"><a href="{% url 'profile' %}">{{ user.fullname|slice:":1" }}</a></button>
+            {% else %}
+            <a href="{% url 'login' %}"><button id="nav-button">Sign In</button></a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Main Heading -->
+    <div class="heading-container">
+        <h1 class="main-heading">Your <span class="highlight">Cart</span></h1>
+        <p class="sub-heading">Review and manage the items you've added to your cart</p>
+    </div>
+    <!-- Cart Items Section -->
+    <div class="cart-container">
+        {% for item in usercart %}
+        <div class="cart-card">
+            <img src="{{ item.courseid.courseimage.url }}" class="cart-image">
+            <div class="cart-content">
+                <h2>{{ item.courseid.coursename }}</h2>
+                <p>{{ item.courseid.description }}</p>
+                <div class="cart-footer">
+                    <p class="cart-price">$ {{ item.courseid.courseprice }}</p>
+                    <a href="{% url 'removecartitem' item.id %}"><button class="remove-button">Remove</button></a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="empty-cart-message">Your cart is currently empty.</p>
+        {% endfor %}
+
+        {% if usercart %}
+        <div class="cart-summary">
+            <p class="total-price">Total: $ {{ total_price }}</p>
+            <a href="{% url 'checkout' %}">
+            <button class="checkout-button">Checkout Courses</button>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

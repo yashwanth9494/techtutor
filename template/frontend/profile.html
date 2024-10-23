@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👷‍♀️ {{ user.fullname }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/frontend/profile.css' %}">
+</head>
+<body>
+
+    <nav>
+        <input type="checkbox" id="toggle-menu">
+        <label for="toggle-menu" class="menu-icon">&#9776;</label>
+        
+        <div class="navbar-left">
+            <a href="#">👷‍♀️ Techtutor Coding School</a>
+        </div>
+        
+        <div class="navbar-right">
+            <a href="{% url 'gethome' %}">Home</a>
+            <a href="{% url 'getcourses' %}">Courses</a>
+            <a href="{% url 'cartview' %}">Cart</a>
+            <a href="{% url 'enrolledcourses' %}">Enrolled-courses</a>
+            <a href="{% url 'logout' %}"><button id="nav-button">SignOut</button></a>
+        </div>
+    </nav>
+
+    
+    <div class="profile-container">
+        <div class="profile-initial">{{ user.fullname|slice:":1" }}</div>
+        <h2>Welcome, {{ user.fullname }}!</h2>
+        <div class="profile-details">
+            <p><strong>Full Name:</strong> {{ user.fullname }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Mobile Number:</strong> {{ user.phone_no }}</p>
+        </div>
+        
+        <div class="Update-button">
+            <button type="button" class="button">
+                <a href="{% url 'update' user.id %}">Update Profile</a>
+            </button>
+            <button type="button" class="del-button">
+                <a href="{% url 'delete' user.id %}">Delete Profile</a>
+            </button>
+        </div>
+    </div>
+    
+</body>
+</html>

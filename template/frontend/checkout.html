@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "css/frontend/checkout.css" %}">
+</head>
+<body>
+    
+    <nav>
+        <input type="checkbox" id="toggle-menu">
+        <label for="toggle-menu" class="menu-icon">&#9776;</label>
+        
+        <div class="navbar-left">
+            <a href="#">👷‍♀️ Techtutor Coding School</a>
+        </div>
+        
+        <div class="navbar-right">
+            <a href="{% url 'gethome' %}">Home</a>
+            <a href="{% url 'getcourses' %}">Courses</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'cartview' %}">Cart</a>
+            <a href="{% url 'enrolledcourses' %}">Enrolled-courses</a>
+            <button id="user-circle"><a href="{% url 'profile' %}">{{ user.fullname|slice:":1" }}</a></button>
+            {% else %}
+            <button id="nav-button"><a href="{% url 'login' %}">Sign In</a></button>
+            {% endif %}
+        </div>
+    </nav>  
+
+    <div class="heading-container">
+        <h1 class="main-heading">Check<span class="highlight">out</span></h1>
+        <p class="sub-heading">Complete your purchase</p>
+    </div>
+
+    <div class="cart-container">
+        {% for item in cartitems %}
+       {% if id.courseid  %}
+       <div class="cart-card">
+            <img src="{{ item.courseid.courseimage.url }}" alt="{{ item.courseid.coursename }}" class="cart-image">
+            <div class="cart-content">
+            <h2>{{ item.courseid.coursename }}</h2>
+            <p>{{ item.courseid.coursedescription }}</p>
+            <div class="cart-footer">
+                <span class="cart-price">${{ item.courseid.courseprice }}</span>
+            </div>
+        </div>
+        </div>
+       {% else %}
+       <div class="cart-card">
+        <img src="{{ item.courseimage.url }}" alt="{{ item.coursename }}" class="cart-image">
+        <div class="cart-content">
+            <h2>{{ item.coursename }}</h2>
+            <p>{{ item.coursedescription }}</p>
+            <div class="cart-footer">
+                <span class="cart-price">${{ item.courseprice }}</span>
+            </div>
+        </div>
+    </div>
+       {% endif %}
+        {% empty %}
+        <p class="empty-cart-message">Your cart is empty.</p>
+        {% endfor %}
+    </div>
+
+    <div class="cart-summary">
+        <span class="total-price">Total: ${{ total_price }}</span>
+        {% if id %}
+        <form action="{% url 'enrollwithid' id %}" method="POST">
+            
+            {% csrf_token %}
+            <button type="submit" class="btnname">Proceed to Enroll</button>
+        </form>
+        {% else %}
+        <form action="{% url 'enroll'  %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btnname">Proceed to Enroll</button>
+        </form>
+        {%  endif %}
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+</body>
+</html>
