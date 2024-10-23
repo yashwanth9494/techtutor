@@ -15,7 +15,7 @@
     ],
     "env": {
       "SECRET_KEY": "django-insecure-3fi5(9!bz1k-n0c_(6+b1&$y5v-7^ppf7&0t!_*mz@ub-l!n)2",
-      "DEBUG": "False",
+      "DEBUG": "True",
       "DATABASE_URL": "postgres://postgres:FSiAmBaEaAPDVdPzUSMnzYjNVcjSyFpJ@autorack.proxy.rlwy.net:51283/railway",
       "ALLOWED_HOSTS": "*",
       "CORS_ALLOW_ALL_ORIGINS": "True",
