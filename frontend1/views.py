@@ -27,11 +27,24 @@ def gethome(request):
 
 
 def getcourses(request):
-    user=request.user
+    user = request.user
     courses = coursemodel.objects.all()
-    cartitems = list(add_to_cart.objects.filter(userid=user).values_list("courseid",flat=True))
-    enrolleditems = list(enrolled_courses.objects.filter(userid=user).values_list("courseid", flat=True))
-    return render(request,'frontend/coursecard.html',{'courses':courses,'cartitems':cartitems,"enrolleditems":enrolleditems})
+
+    if user.is_authenticated:
+        # User is authenticated, fetch cart and enrolled courses
+        cartitems = list(add_to_cart.objects.filter(userid=user).values_list("courseid", flat=True))
+        enrolleditems = list(enrolled_courses.objects.filter(userid=user).values_list("courseid", flat=True))
+    else:
+        # User is not authenticated, return empty cart and enrolled items
+        cartitems = []
+        enrolleditems = []
+
+    return render(request, 'frontend/coursecard.html', {
+        'courses': courses,
+        'cartitems': cartitems,
+        'enrolleditems': enrolleditems
+    })
+
 
 
 
