@@ -1,0 +1,401 @@
+
+/* General styles */
+body {
+    background-image: url("/static/images/background.112b83f43615.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    user-select: none;
+}
+
+/* Navbar */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-family: "Orbitron", sans-serif;
+    font-size: 15px;
+}
+
+nav div a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 0 15px;
+}
+
+nav div a:hover {
+    color: #00e676;
+}
+
+/* Hide the checkbox by default */
+#toggle-menu {
+    display: none;
+}
+
+/* Menu Icon - always on the right */
+.menu-icon {
+    font-size: 30px;
+    cursor: pointer;
+    display: none;
+    color: #fff;
+    margin-left: auto;
+}
+
+/* Navbar layout for desktop */
+.navbar-left {
+    flex-shrink: 0;
+}
+
+.navbar-right {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+}
+
+/* Improved User circle styles */
+#user-circle {
+    width: 40px;  /* Fixed width */
+    height: 40px; /* Fixed height - same as width for perfect circle */
+    background-color: #00e676;
+    border-radius: 50%; /* Use 50% for perfect circle */
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex; /* Use flexbox for centering */
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#user-circle:hover {
+    background-color: #00c853; /* Slightly darker on hover */
+}
+
+#user-circle > a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px; /* Adjust based on your needs */
+    padding: 0; /* Remove padding to prevent distortion */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Sign in button */
+#nav-button {
+    background-color: #00e676;
+    border: none;
+    border-radius: 4px;
+}
+
+#nav-button a {
+    color: white;
+    padding: 5px 10px;
+    display: inline-block;
+}
+
+/* Responsive styles for mobile/tablet */
+@media (max-width: 768px) {
+    nav {
+        position: relative;
+    }
+    
+    .menu-icon {
+        display: block;
+        order: 3;
+    }
+    
+    .navbar-left {
+        order: 1;
+    }
+    
+    .navbar-right {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 200px;
+        z-index: 1;
+        
+        background: rgba(51, 51, 51, 0.8);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        
+        border-radius: 10px;
+        margin-top: 10px;
+        
+        align-items: center;
+        padding: 20px 0;
+    }
+    
+    #toggle-menu:checked ~ .navbar-right {
+        display: flex;
+    }
+    
+    .navbar-right a {
+        padding: 15px 0;
+        text-align: center;
+        width: 100%;
+        transition: color 0.3s ease;
+    }
+    
+    /* Adjust user circle for mobile while maintaining shape */
+    #user-circle {
+        margin: 10px 0;
+        /* Keep the same size in mobile view */
+        width: 40px;
+        height: 40px;
+    }
+    
+    /* Animate the dropdown */
+    .navbar-right {
+        transition: all 0.3s ease;
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    
+    #toggle-menu:checked ~ .navbar-right {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+/* heading */
+
+.heading-container{
+    width: 60%;
+    padding-left: 20px;
+    color: #ccc;
+}
+.main-heading{
+    font-size: 70px;  
+    font-family: 'Lato', sans-serif;
+}
+.span{
+    color: #00e676;
+}
+.heading{
+    font-size: 40px;
+    font-family: 'Lato', sans-serif;
+}
+
+
+/* Card heading */
+
+.card-heading{
+    color: #ccc;
+    font-size: 4vh;
+    font-weight: 500;
+    padding-left: 30px ;
+    font-family: 'Lato', sans-serif;
+    margin-top: 10vh;
+}
+
+/* Course container */
+.course-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.course-container > div {
+    flex: 0 0 calc(33.333% - 20px);
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Course card */
+.course-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px 15px 0 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Card image */
+.course-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Content area */
+.content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.content h2 {
+    font-size: 1.5rem;
+    margin: 0 0 10px;
+    color: #d3d7d5;
+}
+
+.content p {
+    font-size: 0.9rem;
+    color: rgba(179, 175, 175, 0.8);
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.card-line{
+    width: 100%;
+}
+/* Tags */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.tag {
+    background: #a0a2a133;
+    color: #f0f3f1;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+}
+
+/* Card footer */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: hsla(0, 1%, 42%, 0.2);
+    margin-top: auto;
+    color: #f0f3f1;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Buy button */
+.buy-button {
+    width: 100%;
+    background-color: #00e676;
+    color: white;
+    border: none;
+    border-radius: 0 0 15px 15px;
+    padding: 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.buy-button:hover {
+    background-color: #00c853;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 230, 118, 0.4);
+}
+.add-to-cart{
+    width: 100%;
+    background-color: #b73e20;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    margin-top: 8px;
+    font-size: 1rem;
+    border-radius: 0.8rem;
+    font-family: 'Lato', sans-serif;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+.add-to-cart:hover{
+    background-color: #852e18;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 8px #9e7054;
+}
+
+/* Responsive design */
+@media screen and (max-width: 1200px) {
+    .course-container > div {
+        flex: 0 0 calc(50% - 15px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .course-container > div {
+        flex: 0 0 100%;
+    }
+    
+    .card-heading {
+        font-size: 1.5rem;
+    }
+    
+    body {
+        padding: 10px;
+    }
+}
+
+
+/* Footer */
+.card-footer {
+    display: flex;
+    justify-content: space-around;
+    color: white;
+    margin: 50px 0;
+}
+
+.footer-content h3, .footer-content h1 {
+    color: #00e676;
+    margin-bottom: 15px;
+}
+
+.footer-content p {
+    margin: 5px 0;
+}
+
+.footer-content {
+    text-align: left;
+}
+
+@media screen and (max-width: 768px) {
+    .card-footer {
+        flex-direction: column;
+        text-align: center;
+        padding-left: 10px;
+    }
+
+    .footer-content {
+        margin-bottom: 20px;
+    }
+}
+
+/* Copyright Section */
+.copyright {
+    text-align: center;
+    color: white;
+    padding: 20px 0;
+}

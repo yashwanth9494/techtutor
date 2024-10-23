@@ -1,0 +1,33 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "techtutor/wsgi.py",
+        "use": "@vercel/python"
+      },
+      {
+        "src": "static/*",
+        "use": "@vercel/static"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/static/(.*)",
+        "dest": "/static/$1"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "techtutor/wsgi.py"
+      }
+    ],
+    "env": {
+      "SECRET_KEY": "django-insecure-3fi5(9!bz1k-n0c_(6+b1&$y5v-7^ppf7&0t!_*mz@ub-l!n)2",
+      "DB_NAME": "railway",
+      "DB_USER": "postgres",
+      "DB_PASSWORD": "FSiAmBaEaAPDVdPzUSMnzYjNVcjSyFpJ",
+      "DB_HOST": "autorack.proxy.rlwy.net",
+      "DB_PORT": "51283",
+      "DEBUG": "true"
+    }
+  }
+  
