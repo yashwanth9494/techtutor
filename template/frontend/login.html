@@ -52,7 +52,7 @@
             {% if x %}
             <a href="{% url 'changepassword' x %}" class="forgot-password">Forgot Password?</a>
             {% else %}
-            <a href="" class="forgot-password">Forgot Password?</a>
+            <a href="{% url 'changepassword_no_value' %}" class="forgot-password">Forgot Password?</a>
             {% endif %}
         </div>
     </div>

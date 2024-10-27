@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static "css/frontend/checkout.css" %}">
 </head>
 <body>
-    
+
     <nav>
         <input type="checkbox" id="toggle-menu">
         <label for="toggle-menu" class="menu-icon">&#9776;</label>
@@ -38,27 +38,27 @@
 
     <div class="cart-container">
         {% for item in cartitems %}
-       {% if id.courseid  %}
+       {% if id  %}
        <div class="cart-card">
-            <img src="{{ item.courseid.courseimage.url }}" alt="{{ item.courseid.coursename }}" class="cart-image">
+            <img src="{{ item.courseimage.url }}" alt="{{ item.coursename }}" class="cart-image">
             <div class="cart-content">
-            <h2>{{ item.courseid.coursename }}</h2>
-            <p>{{ item.courseid.coursedescription }}</p>
+            <h2>{{ item.coursename }}</h2>
+            <p>{{ item.description }}</p>
             <div class="cart-footer">
-                <span class="cart-price">${{ item.courseid.courseprice }}</span>
+                <span class="cart-price">${{ item.courseprice }}</span>
             </div>
         </div>
         </div>
        {% else %}
        <div class="cart-card">
-        <img src="{{ item.courseimage.url }}" alt="{{ item.coursename }}" class="cart-image">
+        <img src="{{ item.courseid.courseimage.url }}" alt="{{ item.courseid.coursename }}" class="cart-image">
         <div class="cart-content">
-            <h2>{{ item.coursename }}</h2>
-            <p>{{ item.coursedescription }}</p>
-            <div class="cart-footer">
-                <span class="cart-price">${{ item.courseprice }}</span>
-            </div>
+        <h2>{{ item.courseid.coursename }}</h2>
+        <p>{{ item.courseid.description }}</p>
+        <div class="cart-footer">
+            <span class="cart-price">${{ item.courseid.courseprice }}</span>
         </div>
+    </div>
     </div>
        {% endif %}
         {% empty %}
@@ -70,18 +70,18 @@
         <span class="total-price">Total: ${{ total_price }}</span>
         {% if id %}
         <form action="{% url 'enrollwithid' id %}" method="POST">
-            
             {% csrf_token %}
             <button type="submit" class="btnname">Proceed to Enroll</button>
         </form>
+
         {% else %}
         <form action="{% url 'enroll'  %}" method="POST">
             {% csrf_token %}
             <button type="submit" class="btnname">Proceed to Enroll</button>
         </form>
-        {%  endif %}
+        {% endif %}
     </div>
-
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 </body>
 </html>

@@ -105,19 +105,45 @@ def deleteview(request, id):
     obj.delete()
     return redirect('gethome')   
 
-@login_required(login_url='/login/')
-def changepassword(request, value):
-    try:
-        obj = CustomUser.objects.get(email=value)
-    except CustomUser.DoesNotExist:
-        return HttpResponse('User not found', status=404)
+
+def changepassword(request, value=None):
+    if value:
+        try:
+            # Case 1: User identifier (email) is provided, fetch user
+            obj = CustomUser.objects.get(email=value)
+        except CustomUser.DoesNotExist:
+            return HttpResponse('User not found', status=404)
+    else:
+        obj = None  # Case 2: No identifier provided, expect user to enter details
+
     if request.method == "POST":
-        f = changepasswordform(request.POST,instance=obj)
+        # If an identifier is provided, bind form to that user instance
+        if obj:
+            f = changepasswordform(request.POST, instance=obj)
+        else:
+            # If no identifier, create form without instance and validate user input
+            f = changepasswordform(request.POST)
+
         if f.is_valid():
-            f.save()
+            # If form is valid, save the password change
+            if obj:
+                # Case 1: Directly save the new password
+                f.save()
+            else:
+                # Case 2: Fetch user by email entered in form
+                email = f.cleaned_data.get('email')
+                try:
+                    obj = CustomUser.objects.get(email=email)
+                    # Update the instance with the new password
+                    obj.set_password(f.cleaned_data.get('password'))
+                    obj.save()
+                except CustomUser.DoesNotExist:
+                    return HttpResponse('User not found', status=404)
             return redirect('login')
     else:
-        f = changepasswordform()
+        # Initialize the form for GET requests
+        f = changepasswordform(instance=obj) if obj else changepasswordform()
+
     return render(request, 'frontend/changepassword.html', {'f': f})
 
 
