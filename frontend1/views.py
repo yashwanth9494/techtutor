@@ -46,8 +46,6 @@ def getcourses(request):
     })
 
 
-
-
 def registrationview(request):
     f = regform()
     if request.method == 'POST':

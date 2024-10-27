@@ -14,7 +14,7 @@ def create_concept(request):
         if ff1.is_valid():
             ff1.save()
             return HttpResponse("concept added")
-    return render(request,'concept.html',{'ff':ff})
+    return render(request,'backend/concept.html',{'ff':ff})
 
 @login_required(login_url='/login/')
 @user_passes_test(lambda user: user.is_staff)
@@ -25,7 +25,7 @@ def create_course(request):
         if f1.is_valid():
             f1.save()
             return redirect("myapp:menu")
-    return render(request,'course.html',{'f':f})
+    return render(request,'backend/course.html',{'f':f})
 
 @login_required(login_url='/login/')
 @user_passes_test(lambda user: user.is_staff)
