@@ -13,7 +13,7 @@ def create_concept(request):
         ff1 = courseconceptform(request.POST)
         if ff1.is_valid():
             ff1.save()
-            return HttpResponse("concept added")
+            return redirect('myapp:conceptmodel')
     return render(request,'backend/concept.html',{'ff':ff})
 
 @login_required(login_url='/login/')
@@ -53,3 +53,33 @@ def update(request, id):
         else:
             form = coursemodelform(instance = obj)
     return render(request,'backend/update.html',{'form':form})
+
+@login_required(login_url='/login/')
+@user_passes_test(lambda user: user.is_staff)
+def menuconcepts(request):
+    concepts = courseconcept.objects.all()
+    return render(request,'backend/menuconcept.html', {'concepts':concepts})
+
+@login_required(login_url='/login/')
+@user_passes_test(lambda user: user.is_staff)
+def remove(request,id):
+    obj = courseconcept.objects.get(id=id)
+    obj.delete()
+    return redirect("myapp:menuconcepts")
+
+@login_required(login_url='/login/')
+@user_passes_test(lambda user: user.is_staff)
+def updateconcept(request, id):
+    obj = courseconcept.objects.get(id = id)
+    form = courseconceptform(instance=obj)
+    if request.method == 'POST':
+        form = courseconceptform(request.POST, instance = obj)
+        if form.is_valid():
+            form.save()
+            return redirect("myapp:menuconcepts")
+        else:
+            form = coursemodelform(instance = obj)
+    return render(request,'backend/concept.html',{'form':form})
+
+
+

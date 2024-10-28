@@ -167,17 +167,15 @@ nav div a:hover {
 }
 
 
-
-
 .course-form-container {
     min-height: 100vh;
     padding: 2rem 1rem;
 }
 
 .form-card {
-    background: rgba(121, 205, 139, 0.25);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 1rem;
     padding: 2rem;
@@ -218,7 +216,7 @@ nav div a:hover {
 
 .submit-btn {
     background-color: #0e9c23;
-    color: white;
+    color: rgb(134, 227, 105);
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
     border: none;

@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Concepts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/backend/menuconcept.css' %}">
+</head>
+<body>
+    <h1 class="page-title">Course Concepts</h1>
+
+    {% if concepts %}
+        <div class="concepts-grid">
+            {% for concept in concepts %}
+                <div class="concept-card">
+                    <p class="concept-text">{{ concept.courseconcept }}</p>
+                    <button class="update"><a href="{% url "myapp:updateconcept" concept.id %}">Update</a></button>
+                    <button class="remove"><a href="{% url "myapp:remove" concept.id %}">Remove</a></button>
+                </div>
+            {% endfor %}
+            <div class="flex">
+                <a href=" {% url "myapp:conceptmodel" %} " class="add-concept-btn">+</a>
+            </div>
+        </div>
+    {% else %}
+        <div class="no-concepts">
+            <p class="no-concepts-text">No concepts have been added yet.</p>
+            <a href="" class="add-concept-btn">+</a>
+            <p class="no-concepts-text">Click the button above to add your first concept!</p>
+        </div>
+
+    {% endif %}
+
+    
+</body>
+</html>

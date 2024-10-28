@@ -1,15 +1,28 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Create Course Concept</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "css/backend/concept.css" %}">
 </head>
 <body>
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ ff }}
-        <input type="submit">
-    </form>
+    <div class="concept-form-container">
+        <div class="form-card">
+            <h1 class="form-title">Add Course Concept</h1>
+            <form method="POST">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label class="form-label" >Course Concept</label>
+                    <input class="input_box" {{ff.courseconcept}}>
+                </div>
+
+                <button type="submit" class="submit-btn">Add Concept</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
