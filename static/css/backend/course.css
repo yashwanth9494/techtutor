@@ -176,10 +176,10 @@ nav div a:hover {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: none;
     border-radius: 1rem;
     padding: 2rem;
-    max-width: 800px;
+    max-width: 500px;
     margin: 0 auto;
 }
 
@@ -200,6 +200,15 @@ nav div a:hover {
     margin-bottom: 0.5rem;
     color: #21dc3daf;
     display: block;
+    border: none;
+    border-radius: 0.5rem;
+}
+.input_box{
+    border: none;
+    border-radius: 0.5rem;
+    width: 100%;
+    background-color: #8a8d8f;
+    padding: 0.75rem 1.5rem;
 }
 
 .form-control {
@@ -216,7 +225,7 @@ nav div a:hover {
 
 .submit-btn {
     background-color: #0e9c23;
-    color: rgb(134, 227, 105);
+    color: rgb(230, 234, 229);
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
     border: none;
@@ -226,7 +235,7 @@ nav div a:hover {
 }
 
 .submit-btn:hover {
-    background-color: #1e40af;
+    background-color: #1eaf1e;
 }
 
 select[multiple] {

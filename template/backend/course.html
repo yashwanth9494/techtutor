@@ -35,35 +35,35 @@
                 {% csrf_token %}
                 
                 <div class="form-group">
-                    <label class="form-label" for="{{ f.coursename.id_for_label }}">Course Name</label>
-                    {{ f.coursename }}
+                    <label class="form-label">Course Name</label>
+                    <input class="input_box" type="text" name="{{ f.coursename.name }}" required>
                 </div>
-
+    
                 <div class="form-group">
-                    <label class="form-label" for="{{ f.description.id_for_label }}">Description</label>
-                    {{ f.description }}
+                    <label class="form-label">Description</label>
+                    <input class="input_box" type="text" name="{{ f.description.name }}" required>
                 </div>
-
+    
                 <div class="form-group">
-                    <label class="form-label" for="{{ f.courseimage.id_for_label }}">Course Image</label>
-                    {{ f.courseimage }}
+                    <label class="form-label">Course Image</label>
+                    <input class="input_box" type="file" name="{{ f.courseimage.name }}" accept="image/*" required>
                 </div>
-
+    
                 <div class="form-group">
-                    <label class="form-label" for="{{ f.courselist.id_for_label }}">Course Concepts</label>
+                    <label class="form-label">Course Concepts</label>
                     {{ f.courselist }}
                 </div>
-
+    
                 <div class="form-group">
-                    <label class="form-label" for="{{ f.courseprice.id_for_label }}">Course Price</label>
-                    {{ f.courseprice }}
+                    <label class="form-label">Course Price</label>
+                    <input class="input_box" type="number" name="{{ f.courseprice.name }}" required>
                 </div>
-
+    
                 <div class="form-group">
-                    <label class="form-label" for="{{ f.courseTutor.id_for_label }}">Course Tutor</label>
-                    {{ f.courseTutor }}
+                    <label class="form-label">Course Tutor</label>
+                    <input class="input_box" type="text" name="{{ f.courseTutor.name }}" required>
                 </div>
-
+    
                 <button type="submit" class="submit-btn">Create Course</button>
             </form>
         </div>
