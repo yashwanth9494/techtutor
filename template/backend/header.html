@@ -1,0 +1,18 @@
+
+
+<nav>
+    <input type="checkbox" id="toggle-menu">
+    <label for="toggle-menu" class="menu-icon">&#9776;</label>
+    
+    <div class="navbar-left">
+        <a href="#">👷‍♀️ Techtutor Coding School</a>
+    </div>
+    
+    <div class="navbar-right">
+        <a href="{% url 'myapp:menu' %}">Menu</a>
+        <a href="{% url 'myapp:menuconcepts' %}">Concepts</a>
+        <a href="{% url 'myapp:conceptmodel' %}">Add-concept</a>
+        <a href="{% url 'myapp:coursemodel' %}">Add-course</a>
+        <button id="user-circle"><a href="{% url 'profile' %}">{{ user.fullname|slice:":1" }}</a></button>
+    </div>
+</nav>

@@ -1,189 +1,343 @@
-body {
-    background-image: url("/static/images/background.jpg");
-    background-size: cover;
-    background-position: center;
-    min-height: 100vh;
-    user-select: none;
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+body {
+    background-image: url("/static/images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Navbar */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-family: "Orbitron", sans-serif;
+    font-size: 15px;
+}
+
+nav div a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 0 15px;
+}
+
+nav div a:hover {
+    color: #00e676;
+}
+
+/* Hide the checkbox by default */
+#toggle-menu {
+    display: none;
+}
+
+/* Menu Icon - always on the right */
+.menu-icon {
+    font-size: 30px;
+    cursor: pointer;
+    display: none;
+    color: #fff;
+    margin-left: auto;
+}
+
+/* Navbar layout for desktop */
+.navbar-left {
+    flex-shrink: 0;
+}
+
+.navbar-right {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+}
+
+/* Improved User circle styles */
+#user-circle {
+    width: 40px;  /* Fixed width */
+    height: 40px; /* Fixed height - same as width for perfect circle */
+    background-color: #00e676;
+    border-radius: 50%; /* Use 50% for perfect circle */
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex; /* Use flexbox for centering */
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#user-circle:hover {
+    background-color: #00c853; /* Slightly darker on hover */
+}
+
+#user-circle > a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px; /* Adjust based on your needs */
+    padding: 0; /* Remove padding to prevent distortion */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Sign in button */
+#nav-button {
+    background-color: #00e676;
+    border: none;
+    border-radius: 4px;
+}
+
+#nav-button a {
+    color: white;
+    padding: 5px 10px;
+    display: inline-block;
+}
+
+/* Responsive styles for mobile/tablet */
+@media (max-width: 768px) {
+    nav {
+        position: relative;
+    }
+    
+    .menu-icon {
+        display: block;
+        order: 3;
+    }
+    
+    .navbar-left {
+        order: 1;
+    }
+    
+    .navbar-right {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 200px;
+        z-index: 1;
+        
+        background: rgba(51, 51, 51, 0.8);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        
+        border-radius: 10px;
+        margin-top: 10px;
+        
+        align-items: center;
+        padding: 20px 0;
+    }
+    
+    #toggle-menu:checked ~ .navbar-right {
+        display: flex;
+    }
+    
+    .navbar-right a {
+        padding: 15px 0;
+        text-align: center;
+        width: 100%;
+        transition: color 0.3s ease;
+    }
+    
+    /* Adjust user circle for mobile while maintaining shape */
+    #user-circle {
+        margin: 10px 0;
+        /* Keep the same size in mobile view */
+        width: 40px;
+        height: 40px;
+    }
+    
+    /* Animate the dropdown */
+    .navbar-right {
+        transition: all 0.3s ease;
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    
+    #toggle-menu:checked ~ .navbar-right {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
 .page-title {
     text-align: center;
-    margin: 1rem 0.5rem;
-    color: #fff;
-    font-size: clamp(24px, 5vw, 30px);
-    padding: 0 10px;
+    padding: 25px 15px;
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.5px;
 }
 
 .flex {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding: 0 1rem;
+    padding: 10px;
 }
 
 .add-concept-btn {
+    background: rgba(14, 165, 24, 0.3);
+    color: #ffffff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #0ea518;
-    color: #fff;
     text-decoration: none;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    margin: 1rem auto;
-    font-size: clamp(1.5rem, 4vw, 2rem);
-    font-weight: bold;
+    font-size: 28px;
+    margin: 15px auto;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .add-concept-btn:hover {
-    background-color: #199139;
+    background: rgba(14, 165, 24, 0.5);
 }
 
 /* Concepts Grid */
 .concepts-grid {
+    padding: 20px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1rem;
-    padding: 1rem;
+    gap: 25px;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
 .concept-card {
-    border-radius: 0.5rem;
-    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 25px 20px;
     text-align: center;
-    width: 100%;
-    min-height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #0e160f;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    margin: 0.5rem;
 }
 
 .concept-text {
-    font-size: clamp(1rem, 2.5vw, 1.1rem);
-    font-weight: 700;
-    margin: 0 0 1rem 0;
-    color: #fff;
-    word-wrap: break-word;
-    padding: 0 0.5rem;
+    font-size: 18px;
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 20px;
+    line-height: 1.5;
 }
 
-.button-group {
+.button-container {
     display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
+    gap: 12px;
     justify-content: center;
-    width: 100%;
+    margin-top: auto;
 }
 
 .update,
 .remove {
-    flex: 0 1 auto;
-    min-width: 100px;
-    max-width: 150px;
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    margin: 0.25rem;
-    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 8px;
     border: none;
-    font-size: clamp(0.8rem, 2vw, 0.9rem);
-    text-align: center;
-    white-space: nowrap;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    min-width: 100px;
+}
+a{
+    text-decoration: none;
+    color: #ffffff;
 }
 
 .update {
-    background-color: #10b428;
-    color: #fff;
+    background: #11cd2dd4;
 }
 
 .remove {
-    background-color: #a12c0c;
-    color: #fff;
+    background: rgba(220, 46, 20, 0.909);
 }
 
 .update:hover {
-    background-color: #118622;
+    background: rgba(17, 167, 40, 0.879);
 }
 
 .remove:hover {
-    background-color: #da4319;
-}
-
-.update a,
-.remove a {
-    color: #fff;
-    text-decoration: none;
-    display: block;
-    width: 100%;
+    background: rgba(208, 65, 26, 0.865);
 }
 
 .no-concepts {
     text-align: center;
-    margin: 2rem auto;
-    padding: 0 1rem;
-    max-width: 600px;
+    padding: 30px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    margin: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .no-concepts-text {
-    font-size: clamp(1rem, 2.5vw, 1.1rem);
-    margin: 0.5rem 0;
-    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsive Breakpoints */
-@media (max-width: 480px) {
+/* Mobile Adjustments */
+@media screen and (max-width: 768px) {
     .concepts-grid {
-        grid-template-columns: 1fr;
-        padding: 0.5rem;
+        padding: 15px;
+        gap: 15px;
     }
 
     .concept-card {
-        margin: 0.25rem;
-        padding: 0.75rem;
+        padding: 20px 15px;
     }
 
-    .button-group {
-        flex-direction: column;
-        align-items: center;
+    .page-title {
+        font-size: 28px;
+        padding: 20px 10px;
+    }
+
+    .concept-text {
+        font-size: 16px;
     }
 
     .update,
     .remove {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+/* Small Mobile Adjustments */
+@media screen and (max-width: 300px) {
+    .button-container {
+        flex-direction: column;
+    }
+    
+    .update,
+    .remove {
         width: 100%;
-        max-width: 200px;
     }
-}
-
-@media (min-width: 481px) and (max-width: 768px) {
-    .concepts-grid {
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-    .concepts-grid {
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    }
-}
-
-@media (min-width: 1025px) {
-    .concepts-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    
+    .concept-card {
+        padding: 15px 10px;
     }
 }
