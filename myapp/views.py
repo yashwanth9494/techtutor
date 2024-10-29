@@ -2,6 +2,9 @@ from django.shortcuts import render,HttpResponse,redirect
 from .forms import *
 from .models import *
 from django.contrib.auth.decorators import login_required, user_passes_test
+from frontend1.models import CustomUser
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
+from django.views.generic import ListView
 # Create your views here.
 
 
@@ -81,5 +84,28 @@ def updateconcept(request, id):
             form = coursemodelform(instance = obj)
     return render(request,'backend/concept.html',{'form':form})
 
+
+
+class StaffRequiredMixin(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_staff
+
+class UsersData(ListView,StaffRequiredMixin,LoginRequiredMixin):
+    model = CustomUser
+    template_name = 'backend/userdata.html'
+    paginate_by = 10
+    
+    def get_queryset(self):
+        return CustomUser.objects.all().order_by('-date_joined')
+    
+def user_create(request):
+    if request.method == 'POST':
+        form = admin_user_form(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("myapp:userdata")
+    else:
+        form = admin_user_form()
+    return render(request, 'backend/adminuser.html',{'form':form})
 
 

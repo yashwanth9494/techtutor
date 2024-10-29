@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from frontend1.models import CustomUser
 
 class courseconceptform(forms.ModelForm):
     class Meta:
@@ -16,4 +17,9 @@ class coursemodelform(forms.ModelForm):
         model = coursemodel
         fields = '__all__'
 
+
+class admin_user_form(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = '__all__'
 

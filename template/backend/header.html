@@ -13,6 +13,8 @@
         <a href="{% url 'myapp:menuconcepts' %}">Concepts</a>
         <a href="{% url 'myapp:conceptmodel' %}">Add-concept</a>
         <a href="{% url 'myapp:coursemodel' %}">Add-course</a>
+        <a href="{% url 'myapp:userdata' %}">User-data</a>
+
         <button id="user-circle"><a href="{% url 'profile' %}">{{ user.fullname|slice:":1" }}</a></button>
     </div>
 </nav>

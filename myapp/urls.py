@@ -10,4 +10,6 @@ urlpatterns = [
     path('menuconcepts/', menuconcepts, name='menuconcepts'),
     path('remove/<int:id>/', remove, name='remove'),
     path('update/<int:id>', updateconcept, name='updateconcept'),
+    path('userdata/',UsersData.as_view(),name='userdata'),
+    path('usercreate/', user_create, name='usercreate'),
 ]
