@@ -52,7 +52,7 @@ def update(request, id):
             return redirect("myapp:menu")
         else:
             form = coursemodelform(instance = obj)
-    return render(request,'backend/update.html',{'form':form})
+    return render(request,'backend/course.html',{'form':form})
 
 @login_required(login_url='/login/')
 @user_passes_test(lambda user: user.is_staff)
