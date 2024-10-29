@@ -1,3 +1,4 @@
+
 body {
     background-image: url("/static/images/background.jpg");
     background-size: cover;
@@ -5,15 +6,13 @@ body {
     height: 100vh;
     user-select: none;
 }
-
 .concept-form-container {
     min-height: 100vh;
-    padding: 2rem 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 2rem;
 }
-
 .form-card {
     background: rgba(121, 205, 139, 0.25);
     backdrop-filter: blur(15px);
@@ -21,30 +20,26 @@ body {
     border: none;
     border-radius: 1rem;
     padding: 2rem;
+    width: 100%;
     max-width: 800px;
-    margin: 0 auto;
 }
-
 .form-title {
     color: white;
-    font-size: 1.875rem;
+    font-size: 2rem;
     font-weight: 600;
     margin-bottom: 2rem;
     text-align: center;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
-
 .form-group {
     margin-bottom: 1.5rem;
 }
-
 .form-label {
     font-weight: 500;
     margin-bottom: 0.5rem;
     color: rgb(32, 172, 22);
     display: block;
 }
-
 .input_box {
     background-color: #808080;
     border: none;
@@ -52,7 +47,6 @@ body {
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
 }
-
 .form-control {
     background: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.5);
@@ -61,14 +55,12 @@ body {
     width: 100%;
     transition: all 0.3s ease;
 }
-
 .form-control:focus {
     background: white;
     border-color: white;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
     outline: none;
 }
-
 .submit-btn {
     background: rgba(79, 171, 40, 0.9);
     color: #fff;
@@ -81,13 +73,11 @@ body {
     transition: all 0.3s ease;
     margin-top: 1rem;
 }
-
 .submit-btn:hover {
     background: rgb(54, 202, 52);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
-
 .success-message {
     background: rgba(211, 220, 210, 0.9);
     color: #4158D0;
@@ -97,47 +87,34 @@ body {
     text-align: center;
     display: none;
 }
-
 @media (max-width: 768px) {
+    .concept-form-container {
+        padding: 1rem;
+    }
     .form-card {
         padding: 1.5rem;
-        margin: 1rem;
+        max-width: 500px;
     }
-
+    .form-title {
+        font-size: 1.75rem;
+    }
+}
+@media (max-width: 480px) {
+    .concept-form-container {
+        padding: 0.5rem;
+    }
+    .form-card {
+        padding: 1rem;
+        max-width: 300px;
+    }
     .form-title {
         font-size: 1.5rem;
     }
-
     .input_box,
     .form-control {
         padding: 0.5rem 1rem;
     }
-
     .submit-btn {
         padding: 0.5rem 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .concept-form-container {
-        padding: 1rem 0.5rem;
-    }
-
-    .form-card {
-        padding: 1rem;
-        margin: 0.5rem;
-    }
-
-    .form-title {
-        font-size: 1.25rem;
-    }
-
-    .input_box,
-    .form-control {
-        padding: 0.4rem 0.8rem;
-    }
-
-    .submit-btn {
-        padding: 0.4rem 0.8rem;
     }
 }
