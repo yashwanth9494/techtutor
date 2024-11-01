@@ -1,4 +1,5 @@
-from django.shortcuts import render,HttpResponse,redirect
+from django.shortcuts import render,HttpResponse,redirect,get_object_or_404
+from django.contrib import messages
 from .forms import *
 from .models import *
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -97,7 +98,9 @@ class UsersData(ListView,StaffRequiredMixin,LoginRequiredMixin):
     
     def get_queryset(self):
         return CustomUser.objects.all().order_by('-date_joined')
-    
+
+@login_required(login_url='/login/')
+@user_passes_test(lambda user: user.is_staff) 
 def user_create(request):
     if request.method == 'POST':
         form = admin_user_form(request.POST)
@@ -108,4 +111,23 @@ def user_create(request):
         form = admin_user_form()
     return render(request, 'backend/adminuser.html',{'form':form})
 
+@login_required(login_url='/login/')
+@user_passes_test(lambda user: user.is_staff)
+def user_update(request, id):
+    user = get_object_or_404(CustomUser, id=id)
+    if request.method == 'POST':
+        form = CustomUserChangeForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'User {user.username} has been updated successfully.')
+            return redirect('myapp:userdata')
+    else:
+        form = CustomUserChangeForm(instance=user)
+    return render(request, 'backend/adminuser.html', {'form': form, 'is_edit': True})
 
+@login_required(login_url='/login/')
+@user_passes_test(lambda user: user.is_staff)
+def user_delete(request, id):
+    user = get_object_or_404(CustomUser, id=id)
+    user.delete()
+    return redirect('myapp:userdata')

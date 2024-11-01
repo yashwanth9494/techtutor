@@ -23,3 +23,7 @@ class admin_user_form(forms.ModelForm):
         model = CustomUser
         fields = '__all__'
 
+class CustomUserChangeForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = '__all__'

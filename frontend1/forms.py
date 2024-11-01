@@ -62,5 +62,3 @@ class changepasswordform(forms.ModelForm):
         pass_hash.password = make_password(self.cleaned_data['password'], hasher='argon2', salt=custom_salt)
         pass_hash.save()
         return pass_hash
-
-    

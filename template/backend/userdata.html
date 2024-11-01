@@ -81,7 +81,10 @@
 <body>
     {% include "backend/header.html" %}
 
-    <a href="{% url "myapp:usercreate" %} class="" "><button>Add Data</button></a>
+    <div class='button-container'>
+        <a href="{% url "myapp:usercreate"%}" class="add-button"><button>Add Data</button></a>
+    </div>
+    
     <div class="user-table-container">
         <table class="user-table">
             <thead>
@@ -124,8 +127,8 @@
                     <td data-label="Last Login">{{ user.last_login|date:"M d, Y" }}</td>
                     <td data-label="Actions">
                         <div class="action-buttons">
-                            <button class="btn btn-edit">Edit</button>
-                            <button class="btn btn-delete">Delete</button>
+                            <a href="{% url "myapp:userupdate" user.id %}"><button class="btn btn-edit">Edit</button></a>
+                            <a href="{% url "myapp:userdelete" user.id %}"><button class="btn btn-delete">Delete</button></a>
                         </div>
                     </td>
                 </tr>
